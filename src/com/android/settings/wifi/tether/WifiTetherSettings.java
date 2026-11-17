@@ -30,6 +30,8 @@ import android.content.IntentFilter;
 import android.net.wifi.SoftApConfiguration;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -61,6 +63,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
+    // 与 WifiHotspotCustomSubnetSettings / PrivateAddressCoordinator 约定的 Settings.Global 键
+    private static final String CUSTOM_SUBNET_GLOBAL_KEY = "cannon_hotspot_subnet";
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -79,6 +83,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
     @VisibleForTesting
     static final String KEY_INSTANT_HOTSPOT = "wifi_hotspot_instant";
+    @VisibleForTesting
+    static final String KEY_WIFI_HOTSPOT_CUSTOM_SUBNET = "wifi_hotspot_custom_subnet";
 
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
@@ -353,6 +359,18 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherSecurityPreferenceController.class).updateDisplay();
         use(WifiTetherPasswordPreferenceController.class).updateDisplay();
         use(WifiTetherMaximizeCompatibilityPreferenceController.class).updateDisplay();
+        updateCustomSubnetSummary();
+    }
+
+    private void updateCustomSubnetSummary() {
+        final Preference customSubnet = findPreference(KEY_WIFI_HOTSPOT_CUSTOM_SUBNET);
+        if (customSubnet == null) {
+            return;
+        }
+        final String value = Settings.Global.getString(getContext().getContentResolver(),
+                CUSTOM_SUBNET_GLOBAL_KEY);
+        customSubnet.setSummary(TextUtils.isEmpty(value)
+                ? getString(R.string.wifi_hotspot_custom_subnet_summary_auto) : value);
     }
 
     @Override
@@ -397,6 +415,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
                 keys.add(KEY_WIFI_HOTSPOT_SPEED);
                 keys.add(KEY_INSTANT_HOTSPOT);
+                keys.add(KEY_WIFI_HOTSPOT_CUSTOM_SUBNET);
             } else {
                 if (!isSpeedFeatureAvailable()) {
                     keys.add(KEY_WIFI_HOTSPOT_SECURITY);
