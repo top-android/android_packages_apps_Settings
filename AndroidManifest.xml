@@ -24,6 +24,9 @@
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- [cannon] "更多默认应用"页用 addPreferredActivity 指定图片/音乐/视频/文档的默认应用。
+         该权限是 signature|installer|verifier，Settings 是 platform 签名，直接可得。 -->
+    <uses-permission android:name="android.permission.SET_PREFERRED_APPLICATIONS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.DEVICE_POWER" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
@@ -2033,6 +2036,20 @@
                        android:value="com.android.settings.applications.managedomainurls.ManageDomainUrls" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <!-- [cannon] "默认应用"页（PermissionController）里的"更多默认应用"入口。
+             该页只列 RoleManager 的 role，图片/音乐/视频/文档不是 role，
+             只能在这里用 PreferredActivity 指定。PermissionController 只在
+             com.android.settings 声明了该 action 时才显示这一行。 -->
+        <activity
+            android:name=".applications.moredefaults.MoreDefaultAppsActivity"
+            android:exported="true"
+            android:label="@string/more_default_apps_title">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_MORE_DEFAULT_APPS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name="Settings$AppMemoryUsageActivity"

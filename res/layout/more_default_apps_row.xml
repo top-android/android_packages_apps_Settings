@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  [cannon] "更多默认应用"列表行：图标 + 分类名 + 当前默认应用。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="72dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:ellipsize="end"
+            android:maxLines="1" />
+    </LinearLayout>
+</LinearLayout>

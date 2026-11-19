@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="more_default_apps_title">更多默认应用</string>
+    <string name="more_default_apps_images">图片</string>
+    <string name="more_default_apps_audio">音乐</string>
+    <string name="more_default_apps_video">视频</string>
+    <string name="more_default_apps_pdf">PDF 文档</string>
+    <string name="more_default_apps_word">Word 文档</string>
+    <string name="more_default_apps_excel">Excel 表格</string>
+    <string name="more_default_apps_powerpoint">PowerPoint 演示文稿</string>
+    <string name="more_default_apps_text">文本文件</string>
+    <string name="more_default_apps_email">邮箱</string>
+    <string name="more_default_apps_none">未设置</string>
+    <string name="more_default_apps_always_ask">每次询问</string>
+    <string name="more_default_apps_none_available">没有应用可以处理这种类型</string>
+    <string name="more_default_apps_failed">设置默认应用失败</string>
+</resources>

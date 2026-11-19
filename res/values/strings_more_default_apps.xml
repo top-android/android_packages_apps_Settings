@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="more_default_apps_title">More default apps</string>
+    <string name="more_default_apps_images">Images</string>
+    <string name="more_default_apps_audio">Music</string>
+    <string name="more_default_apps_video">Video</string>
+    <string name="more_default_apps_pdf">PDF documents</string>
+    <string name="more_default_apps_word">Word documents</string>
+    <string name="more_default_apps_excel">Excel spreadsheets</string>
+    <string name="more_default_apps_powerpoint">PowerPoint presentations</string>
+    <string name="more_default_apps_text">Text files</string>
+    <string name="more_default_apps_email">Email</string>
+    <string name="more_default_apps_none">Not set</string>
+    <string name="more_default_apps_always_ask">Ask every time</string>
+    <string name="more_default_apps_none_available">No app can handle this type</string>
+    <string name="more_default_apps_failed">Couldn\'t set default app</string>
+</resources>
