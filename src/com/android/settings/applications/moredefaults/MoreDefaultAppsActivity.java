@@ -23,12 +23,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -178,6 +180,22 @@ public class MoreDefaultAppsActivity extends Activity implements AdapterView.OnI
         mAdapter = new RowAdapter();
         mList.setAdapter(mAdapter);
         setContentView(mList);
+
+        // Theme.Settings 的标题栏是 overlay 的（decor 是 ActionBarOverlayLayout），内容从窗口
+        // 顶部开始铺满，标题栏直接压在第一行上——"图片"这一行会被整个盖住，既看不见也点不到。
+        // 布局完成后按标题栏底边 + 导航栏高度给列表补内边距。
+        mList.post(() -> {
+            final View decor = getWindow().getDecorView();
+            final View bar = decor.findViewById(
+                    Resources.getSystem().getIdentifier("action_bar_container", "id", "android"));
+            final WindowInsets insets = decor.getRootWindowInsets();
+            final int top = bar != null ? bar.getBottom() : 0;
+            final int bottom = insets != null ? insets.getSystemWindowInsetBottom() : 0;
+            if (top > 0 || bottom > 0) {
+                mList.setPadding(0, top, 0, bottom);
+                mList.setClipToPadding(false);
+            }
+        });
     }
 
     @Override
