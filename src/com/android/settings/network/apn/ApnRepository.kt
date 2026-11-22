@@ -103,7 +103,7 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
     return apnData
 }
 
-private fun Cursor.getString(columnName: String) = getString(getColumnIndexOrThrow(columnName))
+private fun Cursor.getString(columnName: String) = getString(getColumnIndexOrThrow(columnName)) ?: ""
 private fun Cursor.getInt(columnName: String) = getInt(getColumnIndexOrThrow(columnName))
 private fun Cursor.getLong(columnName: String) = getLong(getColumnIndexOrThrow(columnName))
 
